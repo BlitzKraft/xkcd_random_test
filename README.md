@@ -27,3 +27,5 @@ at.
   comics stop appearing. Set to 1, it has no effect. Increase it to 1000, or
   more to see the graph flattening. (Caution: takes a long time)
 * Only requirement is `matplotlib`, `pylint` is optional
+* Checked with shuffle, since the Easy_xkcd app uses shuffle. The results are
+  similar. 

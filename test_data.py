@@ -17,6 +17,10 @@ TAIL_ITERS = 1
 
 def get_week(start=START, count_dict={}): # pylint: disable=W0102
     sample = random.sample(range(1, start), READ_COMICS)
+    # For testing wiht shuffle instead of choosing randomly
+    # sample = list(range(1, start))
+    # random.shuffle(sample)
+    # sample = sample[:READ_COMICS]
     for index in sample:
         count = count_dict.get(index, 0)
         count_dict.update({index: count + 1})
@@ -33,11 +37,16 @@ def get_week(start=START, count_dict={}): # pylint: disable=W0102
 
 
 def draw_graph(count):
+    # for trimming the results to only after a certain comic index
+    cur = 0
+    keylist = list(count.keys())
+    keylist.sort()
     plt.xkcd()
     plt.figure(figsize=(12, 6), dpi=100)
     plt.xlabel("Comic index")
     plt.ylabel("Number of views")
-    plt.scatter(count.keys(), count.values())
+    run_len = range(cur, max(keylist))
+    plt.scatter(run_len, [count.get(i, 0) for i in run_len])
     plt.savefig('graph.png')
 
 COUNTS_PER_COMIC = get_week()
